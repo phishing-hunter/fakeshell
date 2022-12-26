@@ -20,11 +20,9 @@ def read_file(filename):
     content = ""
     with open(filename, "r") as f:
         content = f.read()
-    print(f"read_file: {filename} size: {len(content)}")
     return content
 
 def create_file(filename, data):
-    print(f"output: {filename}")
     with open(filename, "w") as f:
         f.write(data)
 
