@@ -35,8 +35,9 @@ class FakeShell:
         # ホスト側のファイルシステムをコピーする
         for _dir in rootfs:
             try:
+                _dir = os.path.join("/", _dir)
                 if not _dir in exclude_dir:
-                    self.fs.add_real_directory(os.path.join("/", _dir))
+                    self.fs.add_real_directory(_dir)
             except: pass
         # ワーキングディレクトリをセットする
         os.environ["HOME"] = home

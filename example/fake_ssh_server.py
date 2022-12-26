@@ -41,13 +41,13 @@ class Server(paramiko.server.ServerInterface):
         return ps1
 
     def _execute_command(self, stdin, stdout, event):
-        sh = FakeShell("/")
+        sh = FakeShell("/", exclude_dir=["/scripts", "/dev"])
         ps1 = self._get_ps1()
         banner = f"Hello FakeShell\n\n{ps1}"
         stdout.write(banner)
         for command in stdin:
             if command == "\n":
-                stdout.write(ps1)
+                stdout.write(self._get_ps1())
                 continue
             if command in ["quit\n", "exit\n"]:
                 stdout.write("")

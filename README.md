@@ -3,7 +3,7 @@
 Fakeshellは仮想的なシェル環境を提供するパッケージです。  
 標準で提供されているLinuxコマンドの代わりに、Pythonで実装されたコマンドを実行できます。  
 fakeshellを使用することで、Linuxシステムのようなサンドボックス環境を再現することができます。  
-[![asciicast](https://asciinema.org/a/5wmDUM3w55R7xrYT2y7k24r2F.svg)](https://asciinema.org/a/5wmDUM3w55R7xrYT2y7k24r2F)
+[![asciicast](https://asciinema.org/a/KJ1D2VT7HB6LVz57DJ1dQrACC.svg)](https://asciinema.org/a/KJ1D2VT7HB6LVz57DJ1dQrACC)
 
 ## インストール方法
 pipを使ってfakeshellをインストールできます。
