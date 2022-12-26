@@ -69,6 +69,7 @@ def run_command(command, std_in=""):
                     # ファイルに出力を書き込む
                     output_filename = cmd_args[output_redirection_index + 1]
                     create_file(output_filename, result)
+                    result = ""
             run_func = False
         # それ以外の場合は、コマンドを実行する
         if run_func:

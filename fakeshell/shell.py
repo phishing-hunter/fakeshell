@@ -26,7 +26,7 @@ def replace_env_variables(command: str) -> str:
 
 
 class FakeShell:
-    def __init__(self, cwd="/tmp", home="/"):
+    def __init__(self, cwd="/tmp", home="/", exclude_dir=["/proc", "/dev"]):
         rootfs = os.listdir("/")
         # 仮想ファイルシステムを作成する
         self.patcher = fake_filesystem_unittest.Patcher()
@@ -35,7 +35,8 @@ class FakeShell:
         # ホスト側のファイルシステムをコピーする
         for _dir in rootfs:
             try:
-                self.fs.add_real_directory(os.path.join("/", _dir))
+                if not _dir in exclude_dir:
+                    self.fs.add_real_directory(os.path.join("/", _dir))
             except: pass
         # ワーキングディレクトリをセットする
         os.environ["HOME"] = home

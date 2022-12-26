@@ -64,7 +64,7 @@ class SshHandler(BaseRequestHandler):
         try:
             t = paramiko.Transport(connection)
             t.load_server_moduli()
-            t.add_server_key(paramiko.RSAKey.from_private_key_file("server.key"))
+            t.add_server_key(paramiko.RSAKey.from_private_key_file("/tmp/server.key"))
             server = Server()
             t.start_server(server=server)
             t.join()

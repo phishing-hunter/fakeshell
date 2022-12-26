@@ -16,4 +16,4 @@ def test_cmd_ls(tmpdir):
     output = cmd_ls(std_in="", cmd_args=f"{test_dir}")
 
     # 出力を検証する
-    assert output == "file2.txt  file1.txt  \n"
+    assert output.find("file1.txt") != -1
