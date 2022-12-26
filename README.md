@@ -64,6 +64,7 @@ for result in fake_sh.run_command("hello John"):
 
 ## FakeSSHサーバを構築する
 ```
-$ docker build -t fake_ssh .
-$ docker run --rm -it -p 2222:2222 fake_ssh
+$ docker pull ghcr.io/phishing-hunter/fakeshell:main
+$ docker run --rm -it -d -p 2222:2222 ghcr.io/phishing-hunter/fakeshell:main
+$ ssh root@localhost -p 2222 # root/password
 ```
