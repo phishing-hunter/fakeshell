@@ -1,0 +1,4 @@
+psutil
+humanfriendly
+requests
+pyfakefs
