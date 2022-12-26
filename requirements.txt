@@ -2,3 +2,4 @@ psutil
 humanfriendly
 requests
 pyfakefs
+wheel
