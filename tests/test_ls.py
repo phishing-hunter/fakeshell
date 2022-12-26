@@ -16,4 +16,4 @@ def test_cmd_ls(tmpdir):
     output = cmd_ls(std_in="", cmd_args=f"{test_dir}")
 
     # 出力を検証する
-    assert output == "file1.txt  file2.txt  \n"
+    assert output == "file2.txt  file1.txt  \n"
