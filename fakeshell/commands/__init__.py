@@ -10,3 +10,6 @@ from .ls import cmd_ls
 from .md5sum import cmd_md5sum
 from .mkdir import cmd_mkdir
 from .rm import cmd_rm
+from .utils import cmd_ps, cmd_last
+from .network import cmd_netstat, cmd_iptables
+from .grep import cmd_grep
