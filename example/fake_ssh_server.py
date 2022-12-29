@@ -1,11 +1,67 @@
 import os
 import time
+import shlex
+import random
 import paramiko
 import threading
 import traceback
 from socketserver import ThreadingTCPServer, BaseRequestHandler
 from fakeshell.shell import FakeShell
+from fakeshell.interpreter import register_command
 
+def cmd_nmap(cmd_args="", std_in=""):
+    cmd_args = shlex.split(cmd_args)
+    if "--help" in cmd_args or "-h" in cmd_args:
+        return """
+nmap - Network exploration tool and security/port scanner
+Synopsis:
+  nmap [OPTION]... [TARGET]...
+Description:
+  Scan the TARGET hosts to determine the service and version information.
+Options:
+  -sV              probe open ports to determine service/version info
+  -p [portlist]    specify port range to scan
+  --top-ports num  scan the top num most common ports
+  -oA [file]       output scan results in the specified file in three formats
+  --help           display this help and exit
+"""
+    std_out = "ダミーの結果出力"
+    return std_out
+
+
+def cmd_exploit(cmd_args="", std_in=""):
+    cmd_args = shlex.split(cmd_args)
+    if "--help" in cmd_args or "-h" in cmd_args:
+        return """
+exploit - execute an exploit
+Synopsis:
+  exploit [OPTION]... [EXPLOIT_NAME]
+Description:
+  Execute the specified exploit.
+Options:
+  --help                display this help and exit
+"""
+
+    if len(cmd_args) < 1:
+        return "Error: specify exploit name"
+
+    exploit_name = cmd_args[0]
+
+    # ダミーのログ追記
+    with open("/var/log/syslog", "a") as f:
+        f.write("Executed exploit: {}\n".format(exploit_name))
+
+    # 攻撃が成功する確率は50%
+    if random.randint(0, 1) == 0:
+        # バックドアを設置する
+        with open("/tmp/backdoor.sh", "w") as f:
+            f.write("#!/bin/bash\n")
+            f.write("echo 'I am a backdoor'\n")
+        return "Exploit success"
+    return "Exploit failed"
+
+register_command("nmap", cmd_nmap)
+register_command("exploit", cmd_exploit)
 
 class Server(paramiko.server.ServerInterface):
     def __init__(self):
