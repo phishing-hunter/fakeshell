@@ -26,7 +26,16 @@ def replace_env_variables(command: str) -> str:
 
 
 class FakeShell:
-    def __init__(self, cwd="/tmp", home="/", exclude_dir=["/proc", "/dev"]):
+    def __init__(self, cwd="/tmp", home="/", exclude_dir=["/proc", "/dev"], fakefs=True):
+        self._exclude_dir = exclude_dir
+        self._fakefs = fakefs
+        if self._fakefs:
+            self.start()
+        # ワーキングディレクトリをセットする
+        os.environ["HOME"] = home
+        os.chdir(cwd)
+
+    def start(self):
         rootfs = os.listdir("/")
         # 仮想ファイルシステムを作成する
         self.patcher = fake_filesystem_unittest.Patcher()
@@ -36,12 +45,9 @@ class FakeShell:
         for _dir in rootfs:
             try:
                 _dir = os.path.join("/", _dir)
-                if not _dir in exclude_dir:
+                if not _dir in self._exclude_dir:
                     self.fs.add_real_directory(_dir)
             except: pass
-        # ワーキングディレクトリをセットする
-        os.environ["HOME"] = home
-        os.chdir(cwd)
 
     def run_command(self, command):
         for cmd in command.split(";"):
@@ -49,5 +55,6 @@ class FakeShell:
             yield run_command(cmd)
 
     def stop(self):
-        # 仮想環境の終了
-        self.patcher.tearDown()
+        if self._fakefs:
+            # 仮想環境の終了
+            self.patcher.tearDown()
