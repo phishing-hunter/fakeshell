@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="fakeshell",
-    version="1.0.0",
+    version="1.0.1",
     author="tatsui",
     install_requires=requirements,
     include_package_data=True,

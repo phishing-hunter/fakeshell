@@ -32,6 +32,18 @@ for result in fake_sh.run_command("ls -l > hoge.txt"):
     print(result)
 ```
 
+stopメソッドを呼び出すとファイルシステムへの書き込み内容を元の状態に戻します。
+```python
+fake_sh.stop()
+```
+
+以下のように記述することでstopメソッドを省略することもできます。
+```python
+with FakeShell(cwd="/tmp") as fake_sh:
+    for result in fake_sh.run_command("ls -l > hoge.txt"):
+        print(result)
+```
+
 run_commandメソッドによって実行される関数には、以下のような仮想のファイルシステムが提供されます。  
 仮想ファイルシステム上ではホストマシンのファイルシステムと同じ内容が参照されますが、  
 ファイルシステムへの読み書きはホストマシンへは影響しません。

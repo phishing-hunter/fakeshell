@@ -58,3 +58,9 @@ class FakeShell:
         if self._fakefs:
             # 仮想環境の終了
             self.patcher.tearDown()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.stop()
