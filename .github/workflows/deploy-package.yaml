@@ -2,6 +2,9 @@ name: Deploy Package
 
 on:
   push:
+    paths:
+      - fakeshell/**
+      - setup.py
     branches:
       - main
 

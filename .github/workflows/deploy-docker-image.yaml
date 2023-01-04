@@ -7,6 +7,8 @@ name: Docker
 
 on:
   push:
+    paths:
+      - example/**
     branches: [ "main" ]
 
 env:
